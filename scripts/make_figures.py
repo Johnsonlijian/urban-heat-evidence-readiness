@@ -36,7 +36,7 @@ def fig1_evidence_stack() -> None:
     rows = [
         ["Overture footprints", "Feature enumeration and geometry audit", "Not a complete building census"],
         ["Sentinel attributes", "Vertical-form interpretation where populated", "Not a complete heat-risk descriptor"],
-        ["ERA5 daily files", "Traceable heat-window inventory", "Not street-scale or indoor climate"],
+        ["ERA5 daily-file records", "Heat-window inventory; readable t2m check", "Not street-scale or indoor climate"],
         ["OSM cache", "Context where city assignment is valid", "Not a reliable 30-city predictor here"],
         ["GHS-BUILT-H", "City-window background height context", "Not building-level height truth"],
     ]
@@ -230,4 +230,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

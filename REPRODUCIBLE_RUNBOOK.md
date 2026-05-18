@@ -6,7 +6,7 @@ This runbook reproduces the public figures from already-derived audit tables. It
 
 ## Environment
 
-Tested with Python 3.11 on Windows. The script uses only `matplotlib` and the Python standard library.
+Tested with Python 3.11 on Windows. Figure reproduction uses `matplotlib` and the Python standard library. The optional ERA5 temperature-readability summary also uses `numpy`, `xarray` and `netCDF4`.
 
 ```bash
 pip install -r requirements.txt
@@ -24,9 +24,20 @@ Supporting derived audit tables:
 - `data/A2_era5_inventory.csv`
 - `data/A3_osm_file_city_map.csv`
 - `data/A5_ghs_city_join.csv`
+- `data/A6_era5_readable_temperature_daily.csv`
+- `data/A6_era5_readable_temperature_window_summary.csv`
+- `data/A6_era5_inventory_physical_crosswalk.csv`
 - `data/city_manifest.csv`
 
 The public A1 table replaces local source paths with portable source file names.
+
+## Optional ERA5 temperature-readability summary
+
+The A6 tables document a bounded physical-file readability check. When readable ERA5 files are available locally, the script extracts hourly `t2m`, converts kelvin to degrees Celsius, and summarises daily mean, daily maximum and 95th-percentile 2 m temperature. The current public derived A6 summary covers 54 readable physical files across 12 cities. It is a validation subset and is not used to reclassify the main typology.
+
+```bash
+python scripts/compute_era5_heat_window_summary.py --project-root .
+```
 
 ## Reproduce figures
 
@@ -53,4 +64,3 @@ After running the script, confirm that:
 ## Data boundary
 
 The repository contains derived audit tables only. To rerun the original raw-data audits, obtain the source datasets from the providers listed in `DATASETS_AND_LINKS.csv` and follow their respective terms of use.
-
