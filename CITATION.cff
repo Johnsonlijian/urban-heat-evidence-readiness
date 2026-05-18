@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Please cite the associated paper when available. Until publication, cite this repository and the source datasets listed in DATASETS_AND_LINKS.csv."
+title: "Urban heat-adaptation evidence-readiness audit: reproducibility package"
+type: software
+authors:
+  - name: "Johnsonlijian"
+repository-code: "https://github.com/Johnsonlijian/urban-heat-evidence-readiness"
+license: MIT
+date-released: "2026-05-18"
+

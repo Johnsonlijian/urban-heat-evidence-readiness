@@ -1,0 +1,7 @@
+dataset,role_in_audit,official_link,redistributed_here,notes
+Overture Maps Buildings,Open building footprints and attributes,https://docs.overturemaps.org/guides/buildings/,No raw files; derived completeness table only,Building files are not redistributed.
+ERA5 reanalysis,Candidate heat-window climate inventory,https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels,No NetCDF files; derived inventory table only,Daily file inventory is included without raw NetCDF content.
+OpenStreetMap,Context layer source,https://www.openstreetmap.org/copyright,No raw extracts; derived file-to-city assignment audit only,Raw OSM cache files are not redistributed.
+GHS-BUILT-H R2023A,Background built-height context,https://developers.google.com/earth-engine/datasets/catalog/JRC_GHSL_P2023A_GHS_BUILT_H,No raster files; derived city join table only,Global building-height raster is not redistributed.
+GHSL Data Package 2023,Documentation for GHSL products,https://human-settlement.emergency.copernicus.eu/documents/GHSL_Data_Package_2023.pdf,Documentation link only,Used to identify the GHSL building-height product boundary.
+

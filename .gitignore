@@ -1,0 +1,43 @@
+# Local and temporary files
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+.venv/
+venv/
+
+# Raw or restricted data are intentionally excluded
+raw/
+data_raw/
+original_data/
+downloads/
+*.geojson
+*.gpkg
+*.shp
+*.dbf
+*.shx
+*.prj
+*.parquet
+*.nc
+*.tif
+*.tiff
+*.zip
+*.7z
+*.rar
+
+# Active submission and private project material are intentionally excluded
+manuscript/
+submission*/
+cover_letter*
+*_Cover_Letter*
+*_Title_Page*
+reviewer*
+response_to_reviewers*
+rounds/
+logs/
+AI_INTERACTION_PACKS/
+*Conflict*
+*.doc
+*.docx
+*.pdf
+
