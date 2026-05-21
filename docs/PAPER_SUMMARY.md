@@ -2,7 +2,7 @@
 
 ## Working title
 
-Evidence readiness of open building data for urban heat-adaptation screening across 30 cities
+Are open building data ready for urban heat-adaptation screening? Evidence readiness across 30 cities
 
 ## Study question
 
@@ -20,6 +20,8 @@ The audit separates four evidentiary states that are often blended too quickly i
 The central public message is that building footprints alone are not building-scale heat-adaptation evidence. Attribute completeness, climate-window coverage and context-layer validity must be checked before adaptation claims are made.
 
 A bounded A6 readability check demonstrates that, where physical ERA5 files are present and readable, the workflow can extract daily maximum 2 m temperature summaries. This strengthens the urban-climate orientation of the audit while keeping the heat indicator separate from the evidence-readiness typology.
+
+A7 threshold sensitivity shows that the 5% and 10% actionable height thresholds produce the same 4 / 19 / 7 typology split, while a 20% threshold produces a stricter 2 / 21 / 7 split.
 
 ## Claim boundary
 

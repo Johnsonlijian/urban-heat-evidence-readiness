@@ -1,6 +1,6 @@
 # Urban heat-adaptation evidence-readiness audit
 
-This repository contains a public reproducibility package for a 30-city audit of open building and climate-data readiness for urban heat-adaptation screening.
+This repository contains a public reproducibility package for the manuscript "Are open building data ready for urban heat-adaptation screening? Evidence readiness across 30 cities".
 
 The associated manuscript is framed around a bounded claim: mapped open building footprints are not automatically actionable building-scale heat-adaptation evidence. The repository supports that claim with derived audit tables, figure-generation code and generated figure previews. It does not include active submission files.
 
@@ -23,6 +23,8 @@ This repository intentionally excludes raw third-party data, local download arch
 The public derived tables record 1,454,543 audited Overture building features across 30 city-level files. The Overture `height` field is treated as a sentinel attribute for vertical-form interpretability rather than as a complete heat-risk descriptor. Its city-level non-null availability is highly uneven, with the current audit producing an actionable / proxy-limited / evidence-blind split of 4 / 19 / 7 cities.
 
 The A6 derived tables add a bounded ERA5 readability check: 54 physical ERA5 files currently present in the local project tree were readable as hourly `t2m` files, allowing daily maximum 2 m temperature summaries across 12 cities. This is a heat-window validation subset, not a replacement for the full A2 daily-file inventory and not a city risk ranking.
+
+The A7 threshold-sensitivity table reports how the typology changes under 5%, 10% and 20% actionable height cut-offs while holding the evidence-blind rule fixed at `height_rate_in_sample < 0.001`.
 
 ## Quick start
 

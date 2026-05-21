@@ -1,0 +1,4 @@
+actionable_height_threshold,height_threshold_numeric,actionable,proxy_limited,evidence_blind,actionable_cities,evidence_blind_cities,rule_note
+5%,0.05,4,19,7,Singapore; London; Sydney; New_York,Fez; Jaipur; Kinshasa; Jakarta; Mumbai; Mexico_City; Delhi,Evidence-blind rule fixed at height_rate_in_sample < 0.001; actionable requires ERA5 days > 0 and height_rate_in_sample >= threshold.
+10% main,0.1,4,19,7,Singapore; London; Sydney; New_York,Fez; Jaipur; Kinshasa; Jakarta; Mumbai; Mexico_City; Delhi,Evidence-blind rule fixed at height_rate_in_sample < 0.001; actionable requires ERA5 days > 0 and height_rate_in_sample >= threshold.
+20%,0.2,2,21,7,Sydney; New_York,Fez; Jaipur; Kinshasa; Jakarta; Mumbai; Mexico_City; Delhi,Evidence-blind rule fixed at height_rate_in_sample < 0.001; actionable requires ERA5 days > 0 and height_rate_in_sample >= threshold.

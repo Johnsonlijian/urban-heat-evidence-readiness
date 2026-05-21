@@ -4,6 +4,7 @@ import csv
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,53 +34,103 @@ def save_figure(fig: plt.Figure, stem: str) -> None:
 
 
 def fig1_evidence_stack() -> None:
-    rows = [
-        ["Overture footprints", "Feature enumeration and geometry audit", "Not a complete building census"],
-        ["Sentinel attributes", "Vertical-form interpretation where populated", "Not a complete heat-risk descriptor"],
-        ["ERA5 daily-file records", "Heat-window inventory; readable t2m check", "Not street-scale or indoor climate"],
-        ["OSM cache", "Context where city assignment is valid", "Not a reliable 30-city predictor here"],
-        ["GHS-BUILT-H", "City-window background height context", "Not building-level height truth"],
-    ]
-    fig, ax = plt.subplots(figsize=(12, 4.2))
+    fig, ax = plt.subplots(figsize=(13.5, 7.0))
     ax.axis("off")
     ax.text(
         0.0,
         0.98,
-        "Evidence stack for heat-adaptation screening",
-        fontsize=16,
+        "Evidence-readiness ladder for heat-adaptation screening",
+        fontsize=17,
         fontweight="bold",
         transform=ax.transAxes,
     )
     ax.text(
         0.0,
-        0.90,
-        "Open-data layers are treated as separate evidentiary states before any screening claim is made.",
-        fontsize=10.5,
+        0.92,
+        "Each layer must pass its own audit before mapped buildings are promoted into an adaptation-screening claim.",
+        fontsize=11,
         color="#444444",
         transform=ax.transAxes,
     )
-    table = ax.table(
-        cellText=rows,
-        colLabels=["Layer", "Audited role", "Claim boundary"],
-        colWidths=[0.24, 0.40, 0.36],
-        cellLoc="left",
-        bbox=[0.0, 0.05, 1.0, 0.68],
+
+    steps = [
+        ("1", "Open building\nfootprints", "enumerate mapped\nbuilding assets"),
+        ("2", "Attribute\nreadiness", "test height, floors,\nclass and subtype"),
+        ("3", "Climate-window\nreadiness", "audit local ERA5\nfile records"),
+        ("4", "Context-layer\nsupport", "bound OSM and\nGHS roles"),
+        ("5", "Claim\nboundary", "assign allowed and\ndisallowed claims"),
+    ]
+    xs = [0.095, 0.295, 0.495, 0.695, 0.895]
+    y = 0.60
+    w = 0.15
+    h = 0.20
+    fill = ["#eef5f9", "#eff7ea", "#fff7df", "#f4eef8", "#fff1ed"]
+    edge = ["#2b6f8a", "#4d8b31", "#b07800", "#7a5797", "#b94a35"]
+
+    for i, ((num, title, detail), x) in enumerate(zip(steps, xs)):
+        box = FancyBboxPatch(
+            (x - w / 2, y - h / 2),
+            w,
+            h,
+            boxstyle="round,pad=0.012,rounding_size=0.02",
+            facecolor=fill[i],
+            edgecolor=edge[i],
+            linewidth=1.2,
+            transform=ax.transAxes,
+        )
+        ax.add_patch(box)
+        ax.text(x, y + 0.058, num, fontsize=10, fontweight="bold", color=edge[i], ha="center", va="center", transform=ax.transAxes)
+        ax.text(x, y + 0.012, title, fontsize=11, fontweight="bold", ha="center", va="center", transform=ax.transAxes)
+        ax.text(x, y - 0.062, detail, fontsize=9, color="#333333", ha="center", va="center", transform=ax.transAxes)
+        if i < len(xs) - 1:
+            arrow = FancyArrowPatch(
+                (x + w / 2 + 0.012, y),
+                (xs[i + 1] - w / 2 - 0.012, y),
+                arrowstyle="-|>",
+                mutation_scale=12,
+                linewidth=1.1,
+                color="#555555",
+                transform=ax.transAxes,
+            )
+            ax.add_patch(arrow)
+
+    allowed_box = FancyBboxPatch(
+        (0.06, 0.14),
+        0.41,
+        0.26,
+        boxstyle="round,pad=0.018,rounding_size=0.02",
+        facecolor="#eef7ea",
+        edgecolor="#4d8b31",
+        linewidth=1.0,
+        transform=ax.transAxes,
     )
-    table.auto_set_font_size(False)
-    table.set_fontsize(10.5)
-    table.scale(1, 1.75)
-    for (r, c), cell in table.get_celld().items():
-        cell.set_edgecolor("#ffffff")
-        if r == 0:
-            cell.set_facecolor("#e9ecef")
-            cell.set_text_props(fontweight="bold", color="#15324f")
-        elif c == 1:
-            cell.set_facecolor("#eef7ea")
-        elif c == 2:
-            cell.set_facecolor("#fff1ed")
-        else:
-            cell.set_facecolor("#ffffff")
-    save_figure(fig, "Figure_1_evidence_stack_table")
+    blocked_box = FancyBboxPatch(
+        (0.53, 0.14),
+        0.41,
+        0.26,
+        boxstyle="round,pad=0.018,rounding_size=0.02",
+        facecolor="#fff1ed",
+        edgecolor="#b94a35",
+        linewidth=1.0,
+        transform=ax.transAxes,
+    )
+    ax.add_patch(allowed_box)
+    ax.add_patch(blocked_box)
+    ax.text(0.085, 0.355, "Allowed when the ladder is auditable", fontsize=11.5, fontweight="bold", color="#2f6f2f", transform=ax.transAxes)
+    ax.text(0.555, 0.355, "Not supported by this evidence audit", fontsize=11.5, fontweight="bold", color="#9b2f22", transform=ax.transAxes)
+    allowed = "Feature enumeration\nData-readiness diagnosis\nValidation-priority setting\nConservative first-pass screening"
+    blocked = "Mortality or health-impact estimation\nIndoor heat or street-canyon simulation\nCausal intervention effects\nBuilding-level risk ranking\nGHS as per-building height truth"
+    ax.text(0.085, 0.295, allowed, fontsize=10.2, linespacing=1.45, va="top", transform=ax.transAxes)
+    ax.text(0.555, 0.295, blocked, fontsize=10.2, linespacing=1.35, va="top", transform=ax.transAxes)
+    ax.text(
+        0.06,
+        0.055,
+        "Interpretation: the typology is a claim-boundary screen, not a heat-risk, mortality, vulnerability or intervention ranking.",
+        fontsize=9.5,
+        color="#444444",
+        transform=ax.transAxes,
+    )
+    save_figure(fig, "Figure_1_evidence_ladder")
 
 
 def fig2_height_availability(a1_rows: list[dict[str, str]]) -> None:
@@ -135,13 +186,12 @@ def fig3_mapped_vs_actionable(rows: list[dict[str, str]]) -> None:
     ax.grid(True, which="both", color="#cccccc", alpha=0.25)
     label_offsets = {
         "New_York": (-78, 14, "right"),
-        "Los_Angeles": (-82, -26, "right"),
-        "Sao_Paulo": (-30, 26, "right"),
-        "Lagos": (14, 12, "left"),
+        "Sao_Paulo": (-54, 28, "right"),
+        "Lagos": (18, 22, "left"),
         "Jakarta": (14, -12, "left"),
         "Delhi": (-28, -20, "right"),
-        "Sydney": (-64, 12, "right"),
-        "London": (16, 14, "left"),
+        "Sydney": (18, 24, "left"),
+        "London": (18, 22, "left"),
     }
     for r in rows:
         if r["city"] in label_offsets:
@@ -158,6 +208,7 @@ def fig3_mapped_vs_actionable(rows: list[dict[str, str]]) -> None:
                 zorder=5,
             )
     ax.legend(frameon=False, fontsize=8.5, loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=3)
+    ax.margins(x=0.10, y=0.18)
     fig.subplots_adjust(bottom=0.18)
     save_figure(fig, "Figure_3_mapped_vs_attribute_readiness")
 
@@ -184,7 +235,7 @@ def fig4_typology_matrix(rows: list[dict[str, str]]) -> None:
         colLabels=cols,
         colWidths=[0.24, 0.18, 0.14, 0.14, 0.20],
         cellLoc="left",
-        loc="center",
+        bbox=[0.05, 0.055, 0.90, 0.88],
     )
     table.auto_set_font_size(False)
     table.set_fontsize(8.2)
@@ -209,7 +260,7 @@ def fig4_typology_matrix(rows: list[dict[str, str]]) -> None:
             cell.set_facecolor("#f8f9fa")
     ax.text(
         0.0,
-        -0.03,
+        0.015,
         "Counts under current rules: actionable=4, proxy-limited=19, evidence-blind=7.",
         fontsize=9,
         transform=ax.transAxes,

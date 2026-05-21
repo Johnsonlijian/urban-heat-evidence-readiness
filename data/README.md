@@ -11,9 +11,12 @@ This directory contains derived audit tables only.
 - `A6_era5_readable_temperature_daily.csv`: daily 2 m temperature summaries for readable physical ERA5 files available in the local project tree; public copy excludes local file names.
 - `A6_era5_readable_temperature_window_summary.csv`: city-level summary of the readable ERA5 temperature subset.
 - `A6_era5_inventory_physical_crosswalk.csv`: crosswalk between the A2 inventory and physical files found locally for the readability check.
+- `A7_threshold_sensitivity.csv`: typology sensitivity under 5%, 10% and 20% actionable height thresholds.
 - `city_manifest.csv`: 30-city audit manifest with high-level layer availability.
 - `evidence_readiness_scores.csv`: final city-level readiness typology used by the figures.
 
 The A6 tables are a heat-window validation subset. They do not replace the full A2 inventory and should not be read as a complete ERA5 coverage or heat-risk product.
+
+The A7 table is a threshold-sensitivity diagnostic. It does not change the main typology rule.
 
 No raw Overture, ERA5, OSM or GHSL files are redistributed here.
